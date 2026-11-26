@@ -30,6 +30,35 @@ module motor(
     );
 
     // TODO: trace the rest of motor.v and control the speed and direction of the two motors
+
+    always_comb begin
+        case(mode)
+            1: begin
+                
+            end
+            2: begin
+            
+            end
+            3: begin
+            
+            end
+            4: begin
+            
+            end
+            5: begin
+            
+            end
+            6: begin
+            
+            end
+            7: begin
+            
+            end
+            8: begin
+            
+            end
+        endcase
+    end
     
 endmodule
 
@@ -56,6 +85,7 @@ module PWM_gen (
                 PWM <= 0;
             end else begin
                 count <= count + 1;
+                PWM <= 1;
                 // TODO: set <PWM> accordingly
             end
         end
