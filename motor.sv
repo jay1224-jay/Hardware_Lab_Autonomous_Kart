@@ -33,17 +33,25 @@ module motor(
 
     always_comb begin
         case(mode)
-            1: begin
-                
+            0: begin // stop
+                l_IN = 2'b00;
+                r_IN = 2'b00;
             end
-            2: begin
-            
+            1: begin // forward
+                l_IN = 2'b01;
+                r_IN = 2'b01;
             end
-            3: begin
-            
+            2: begin //turn left
+                l_IN = 2'b00;
+                r_IN = 2'b01;
             end
-            4: begin
-            
+            3: begin //turn left
+                l_IN = 2'b01;
+                r_IN = 2'b00;
+            end
+            4: begin //backward
+                l_IN = 2'b10;
+                r_IN = 2'b10;
             end
             5: begin
             
@@ -52,9 +60,6 @@ module motor(
             
             end
             7: begin
-            
-            end
-            8: begin
             
             end
         endcase
