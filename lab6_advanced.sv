@@ -37,6 +37,8 @@ module lab6_advanced(
         .state(state)
     );
 
+    // test
+
     sonic_top B(
         .clk(clk), 
         .rst(rst_op), 
