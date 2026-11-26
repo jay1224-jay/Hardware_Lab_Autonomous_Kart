@@ -11,6 +11,8 @@ module motor(
 );
     logic [9:0] left_motor, right_motor;
     logic left_pwm, right_pwm;
+    assign left_motor = 512;
+    assign right_motor = 512;
     assign pwm = {left_pwm, right_pwm};
 
     PWM_gen m0 (
@@ -53,14 +55,7 @@ module motor(
                 l_IN = 2'b10;
                 r_IN = 2'b10;
             end
-            5: begin
-            
-            end
-            6: begin
-            
-            end
-            7: begin
-            
+            default: begin
             end
         endcase
     end
@@ -90,7 +85,11 @@ module PWM_gen (
                 PWM <= 0;
             end else begin
                 count <= count + 1;
-                PWM <= 1;
+                if (count <= count_duty) begin
+                    PWM <= 1;
+                end else begin
+                    PWM <= 0;
+                end
                 // TODO: set <PWM> accordingly
             end
         end
