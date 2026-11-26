@@ -22,7 +22,6 @@ module div(
     input logic clk,
     output logic out_clk
 );
-    // test
     logic [6:0] cnt;
 
     always_ff @(posedge clk) begin
@@ -63,7 +62,11 @@ module trig_signal(
         end else begin
             next_count = count + 1'b1;
         end
-
+        if (count >= 24'd9) begin
+            next_trig = 1'b0;
+        end else begin
+            next_trig = 1'b1;
+        end
         // TODO: set <next_trig> to let the sensor work properly
     end
 endmodule
@@ -126,5 +129,6 @@ module pos_counter(
         endcase
     end
 
+    assign distance = (distance_register / 2 ) * 0.034;
     // TODO: trace the code and calculate the distance, output it to <distance_count>
 endmodule
