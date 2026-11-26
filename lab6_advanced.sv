@@ -132,19 +132,19 @@ module SevenSegment(
     	end else begin
     		case (digit)
     			4'b1110 : begin
-					display_num <= nums % 1000;
+					display_num <= (nums % 100) / 10;
 					digit <= 4'b1101;
     			end
     			4'b1101 : begin
-					display_num <= nums[11:8];
+					display_num <= (nums % 1000) / 100;
 					digit <= 4'b1011;
 				end
     			4'b1011 : begin
-					display_num <= nums[15:12];
+					display_num <= (nums % 10000) / 1000;
 					digit <= 4'b0111;
 				end
     			4'b0111 : begin
-					display_num <= nums[3:0];
+					display_num <= nums % 10;
 					digit <= 4'b1110;
 				end
     			default : begin

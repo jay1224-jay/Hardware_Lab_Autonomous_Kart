@@ -11,8 +11,8 @@ module motor(
 );
     logic [9:0] left_motor, right_motor;
     logic left_pwm, right_pwm;
-    assign left_motor = 512;
-    assign right_motor = 512;
+    assign left_motor = 700;
+    assign right_motor = 700;
     assign pwm = {left_pwm, right_pwm};
 
     PWM_gen m0 (
