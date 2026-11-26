@@ -61,8 +61,10 @@ module lab6_advanced(
                 mode = MODE_STOP;
         endcase
 
+        /*
         if (distance <= STOP_DISTANCE)
             mode = MODE_STOP;
+        */
     end
     
     tracker_sensor A(
@@ -98,7 +100,7 @@ module lab6_advanced(
         LED[8:0] = 0;
     end
 
-    SevenSegment my_seven(DISPLAY, DIGIT, distance % 10000, rst, clk);
+    SevenSegment my_seven(DISPLAY, DIGIT, distance, rst, clk);
 
     /* ===== DEBUG ===== */
 
@@ -130,7 +132,7 @@ module SevenSegment(
     	end else begin
     		case (digit)
     			4'b1110 : begin
-					display_num <= nums[7:4];
+					display_num <= nums % 1000;
 					digit <= 4'b1101;
     			end
     			4'b1101 : begin

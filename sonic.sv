@@ -62,7 +62,7 @@ module trig_signal(
         end else begin
             next_count = count + 1'b1;
         end
-        if (count >= 24'd9) begin
+        if (count >= 24'd1000) begin
             next_trig = 1'b0;
         end else begin
             next_trig = 1'b1;
@@ -85,8 +85,10 @@ module pos_counter(
     logic [19:0] count, distance_register;
 
     logic echo_reg1, echo_reg2;
-    logic start = echo_reg1 & ~echo_reg2;
-    logic finish = ~echo_reg1 & echo_reg2;
+    logic start;
+    assign start = echo_reg1 & ~echo_reg2;
+    logic finish;
+    assign finish = ~echo_reg1 & echo_reg2;
     
     always_ff @(posedge clk1M) begin
         if (rst) begin
@@ -129,6 +131,6 @@ module pos_counter(
         endcase
     end
 
-    assign distance_count = distance_register * 68 / 1000; // Avoid non-constant real-value error
+    assign distance_count = distance_register * 17 / 1000; // Avoid non-constant real-value error
     // TODO: trace the code and calculate the distance, output it to <distance_count>
 endmodule
