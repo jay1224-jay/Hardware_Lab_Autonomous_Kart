@@ -129,6 +129,6 @@ module pos_counter(
         endcase
     end
 
-    assign distance = (distance_register / 2 ) * 0.034;
+    assign distance = distance_register * 68 / 1000; // Avoid non-constant real-value error
     // TODO: trace the code and calculate the distance, output it to <distance_count>
 endmodule
