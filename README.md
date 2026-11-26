@@ -1,2 +1,2 @@
-# Hardware_Lab_Final_Project
-2026 Fall Hardware Lab Final Project (FPGA)
+# Hardware_Lab_Autonomous_Kart
+2026 Fall Hardware Lab Autonomous Kart (FPGA)
