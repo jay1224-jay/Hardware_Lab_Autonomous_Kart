@@ -97,7 +97,7 @@ module lab6_advanced(
         LED[15:13] = state;
         LED[12] = 0;
         LED[11:9] = mode;
-        LED[8:0] = 0;
+        LED[8:0] = distance;
     end
 
     SevenSegment my_seven(DISPLAY, DIGIT, distance, rst, clk);
