@@ -20,6 +20,21 @@ module lab6_advanced(
     output logic [15:0] LED
     // You may modify or add more input/ouput yourself.
 );
+
+    localparam STATE_IDLE       = 3'b000;
+    localparam STATE_LEFT       = 3'b001;
+    localparam STATE_RIGHT      = 3'b010;
+    localparam STATE_RECOVER    = 3'b011;
+    localparam STATE_STRAIGHT   = 3'b100;
+
+    localparam MODE_STOP     = 3'b000;
+    localparam MODE_FORWARD  = 3'b001;
+    localparam MODE_LEFT     = 3'b010;
+    localparam MODE_RIGHT    = 3'b011;
+    localparam MODE_BACKWARD = 3'b100;
+
+    localparam STOP_DISTANCE = 19'd15;
+
     logic rst_de, rst_op;
     debounce de(.clk(clk), .pb(rst), .pb_debounced(rst_de));
     one_pulse op(.clk(clk), .pb_in(rst_de), .pb_out(rst_op));
@@ -29,15 +44,30 @@ module lab6_advanced(
     logic [2:0] state;      // output of track_sensor
     logic [2:0] mode;       // input of motor
     logic [19:0] distance;  // output of sonic_top
+
+    always_comb begin
+        case (state)
+            STATE_IDLE:
+                mode = MODE_STOP;
+            STATE_LEFT:
+                mode = MODE_LEFT;
+            STATE_RIGHT:
+                mode = MODE_RIGHT;
+            STATE_RECOVER:
+                mode = MODE_BACKWARD;
+            STATE_STRAIGHT:
+                mode = MODE_FORWARD; 
+            default: 
+                mode = MODE_STOP;
+        endcase
+    end
     
     tracker_sensor A(
         .clk(clk),
         .rst(rst_op),
         .IR_outs({IR_out1, IR_out2, IR_out3, IR_out4, IR_out5}),
         .state(state)
-    );
-
-    // test
+    );        
 
     sonic_top B(
         .clk(clk), 
