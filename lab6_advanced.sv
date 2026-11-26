@@ -60,6 +60,9 @@ module lab6_advanced(
             default: 
                 mode = MODE_STOP;
         endcase
+
+        if (distance <= STOP_DISTANCE)
+            mode = MODE_STOP;
     end
     
     tracker_sensor A(

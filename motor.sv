@@ -56,6 +56,8 @@ module motor(
                 r_IN = 2'b10;
             end
             default: begin
+                l_IN = 2'b00;
+                r_IN = 2'b00;
             end
         endcase
     end
