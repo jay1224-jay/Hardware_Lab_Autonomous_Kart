@@ -20,19 +20,27 @@ endmodule
 // clock divider for T = 1us clock
 module div(
     input logic clk,
+    input logic rst,
     output logic out_clk
 );
+
     logic [6:0] cnt;
 
-    always_ff @(posedge clk) begin
-        if (cnt >= 7'd99) begin
-            cnt <= 7'd0;
-        end else begin
-            cnt <= cnt + 1'b1;
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            cnt <= 0;
+            out_clk <= 0;
         end
+        else begin
+            if (cnt == 7'd99)
+                cnt <= 0;
+            else
+                cnt <= cnt + 1'b1;
 
-        out_clk <= (cnt < 7'd50) ? 1'b1 : 1'b0;
+            out_clk <= (cnt < 7'd50);
+        end
     end
+
 endmodule
 
 
