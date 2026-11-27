@@ -11,15 +11,6 @@ module motor(
 );
     logic [9:0] left_motor, right_motor;
     logic left_pwm, right_pwm;
-
-    localparam MODE_STOP     = 3'b000;
-    localparam MODE_FORWARD  = 3'b001;
-    localparam MODE_HARD_LEFT   = 3'b010;
-    localparam MODE_LIGHT_LEFT  = 3'b011;
-    localparam MODE_HARD_RIGHT  = 3'b100;
-    localparam MODE_LIGHT_RIGHT = 3'b101;
-    localparam MODE_BACKWARD = 3'b110;
-
 	
 	always_comb begin
 		case(mode)
