@@ -11,8 +11,33 @@ module motor(
 );
     logic [9:0] left_motor, right_motor;
     logic left_pwm, right_pwm;
-    assign left_motor = 600;
-    assign right_motor = 600;
+	always_comb begin
+		case(mode)
+			0: begin
+				left_motor = 600;
+    			right_motor = 600;
+			end
+			1: begin
+				left_motor = 600;
+    			right_motor = 600;
+			end
+			2: begin
+				left_motor = 550;
+    			right_motor = 650;
+			end
+			3: begin
+				left_motor = 650;
+    			right_motor = 550;
+			end
+			4:begin
+				left_motor = 600;
+    			right_motor = 600;
+			end
+			default: begin
+			end
+		endcase
+	end
+	
     assign pwm = {left_pwm, right_pwm};
 
     PWM_gen m0 (
@@ -33,34 +58,7 @@ module motor(
 
     // TODO: trace the rest of motor.v and control the speed and direction of the two motors
 
-    always_comb begin
-        case(mode)
-            0: begin // stop
-                l_IN = 2'b00;
-                r_IN = 2'b00;
-            end
-            1: begin // forward
-                l_IN = 2'b01;
-                r_IN = 2'b01;
-            end
-            2: begin //turn left
-                l_IN = 2'b00;
-                r_IN = 2'b01;
-            end
-            3: begin //turn left
-                l_IN = 2'b01;
-                r_IN = 2'b00;
-            end
-            4: begin //backward
-                l_IN = 2'b10;
-                r_IN = 2'b10;
-            end
-            default: begin
-                l_IN = 2'b00;
-                r_IN = 2'b00;
-            end
-        endcase
-    end
+	assign {l_IN, r_IN} = (mode == 0) ? 2'b00 : 2'b01;
     
 endmodule
 
@@ -73,8 +71,10 @@ module PWM_gen (
     input logic [9:0] duty,
     output logic PWM
 );
-    logic [31:0] count_max = 100_000_000 / freq;
-    logic [31:0] count_duty = count_max * duty / 1024;
+	logic [31:0] count_max;
+	assign count_max = 100_000_000 / freq;
+	logic [31:0] count_duty;
+	assign count_duty = count_max * duty / 1024;
     logic [31:0] count;
     
     always_ff @(posedge clk, posedge rst) begin
