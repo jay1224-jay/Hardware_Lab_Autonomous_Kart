@@ -62,7 +62,7 @@ module trig_signal(
         end else begin
             next_count = count + 1'b1;
         end
-        if (count > 24'd1_000_000) begin
+        if (count > 24'd1_000) begin
             next_trig = 1'b0;
         end else begin
             next_trig = 1'b1;
@@ -131,6 +131,6 @@ module pos_counter(
         endcase
     end
 
-    assign distance_count = distance_register * 17 / 1000; // Avoid non-constant real-value error
+    assign distance_count = distance_register;// * 17 / 1000; // Avoid non-constant real-value error
     // TODO: trace the code and calculate the distance, output it to <distance_count>
 endmodule

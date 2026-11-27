@@ -36,12 +36,12 @@ module tracker_sensor(
         next_state = state;
         case (IR_outs)
             5'b11111:
-                next_state = STATE_RECOVER;
-            5'b00000:
                 next_state = STATE_STRAIGHT;
-            5'b00001, 5'b00011, 5'b00111, 5'b01111:
+            5'b00000, 5'b11011:
+                next_state = STATE_STRAIGHT;
+            5'b00001, 5'b00011, 5'b00111, 5'b01111, 5'b01111, 5'b10111:
                 next_state = STATE_LEFT;
-            5'b10000, 5'b11000, 5'b11100, 5'b11110:
+            5'b10000, 5'b11000, 5'b11100, 5'b11110, 5'b11110, 5'b11101:
                 next_state = STATE_RIGHT;
             default: 
                 next_state = STATE_STRAIGHT;
