@@ -13,6 +13,8 @@ module motor(
     logic left_pwm, right_pwm;
 	
 	always_comb begin
+        left_motor = 0;
+        right_motor = 0;
 		case(mode)
 			0: begin //stop
 				left_motor = 650;
@@ -38,7 +40,9 @@ module motor(
 				left_motor = 680;
     			right_motor = 450;
 			end
-			default: begin //backward
+			default: begin //backward 
+                left_motor = 650;
+    			right_motor = 650;
 			end
 		endcase
 	end

@@ -55,10 +55,14 @@ module lab6_advanced(
         case (state)
             STATE_IDLE:
                 mode = MODE_STOP;
-            STATE_LEFT:
-                mode = MODE_LEFT;
-            STATE_RIGHT:
-                mode = MODE_RIGHT;
+            STATE_HARD_LEFT:
+                mode = MODE_HARD_LEFT;
+            STATE_LIGHT_LEFT:
+                mode = MODE_LIGHT_LEFT;
+            STATE_HARD_RIGHT:
+                mode = MODE_HARD_RIGHT;
+            STATE_LIGHT_RIGHT:
+                mode = MODE_LIGHT_RIGHT;
             STATE_RECOVER:
                 mode = MODE_BACKWARD;
             STATE_STRAIGHT:
@@ -102,9 +106,10 @@ module lab6_advanced(
     logic [31:0] cnt, t_cnt;
 
     always_ff @( posedge clk, posedge rst ) begin
-        if (rst)
+        if (rst) begin
             cnt <= 0;
             t_cnt <= 0;
+        end
         else begin
             if (echo)
                 cnt <= cnt + 1;

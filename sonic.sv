@@ -10,7 +10,7 @@ module sonic_top(
     output logic [19:0] distance
 );
     logic clk1M;
-    div clk1(clk, clk1M);
+    div clk1(clk, rst, clk1M);
 
     trig_signal ts(.clk(clk), .rst(rst), .trig(trig));
     pos_counter pc(.clk1M(clk1M), .rst(rst), .echo(echo), .distance_count(distance));
