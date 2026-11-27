@@ -25,16 +25,16 @@ module motor(
     			right_motor = 650;
 			end
 			2: begin //hard_left
-				left_motor = 550;
-    			right_motor = 900;
+				left_motor = 350;
+    			right_motor = 700;
 			end
 			3: begin //light_left
 				left_motor = 600;
     			right_motor = 750;
 			end
 			4: begin //hard_right
-				left_motor = 900;
-    			right_motor = 550;
+				left_motor = 700;
+    			right_motor = 350;
 			end
 			5: begin //light_right
 				left_motor = 750;
