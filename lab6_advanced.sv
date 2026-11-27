@@ -49,6 +49,8 @@ module lab6_advanced(
     logic [2:0] mode;       // input of motor
     logic [19:0] distance;  // output of sonic_top
 
+  
+
     always_comb begin
         case (state)
             STATE_IDLE:
@@ -97,6 +99,20 @@ module lab6_advanced(
 
     /* ===== DEBUG ===== */
 
+    logic [31:0] cnt, t_cnt;
+
+    always_ff @( posedge clk, posedge rst ) begin
+        if (rst)
+            cnt <= 0;
+            t_cnt <= 0;
+        else begin
+            if (echo)
+                cnt <= cnt + 1;
+            if (trig)
+                t_cnt <= t_cnt + 1;
+        end
+    end
+
     always_comb begin
         LED[15:13] = state;
         LED[12] = 0;
@@ -105,7 +121,9 @@ module lab6_advanced(
         LED[6:0] = distance;
     end
 
-    SevenSegment my_seven(DISPLAY, DIGIT, distance, rst, clk);
+    SevenSegment my_seven(DISPLAY, DIGIT, distance % 100 + (cnt % 10) * 1000 + (t_cnt % 10) * 100, rst, clk);
+
+
 
     /* ===== DEBUG ===== */
 
