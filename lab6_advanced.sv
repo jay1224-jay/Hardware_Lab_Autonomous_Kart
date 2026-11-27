@@ -22,16 +22,20 @@ module lab6_advanced(
 );
 
     localparam STATE_IDLE       = 3'b000;
-    localparam STATE_LEFT       = 3'b001;
-    localparam STATE_RIGHT      = 3'b010;
-    localparam STATE_RECOVER    = 3'b011;
-    localparam STATE_STRAIGHT   = 3'b100;
+    localparam STATE_HARD_LEFT  = 3'b001;
+    localparam STATE_LIGHT_LEFT = 3'b010;
+    localparam STATE_HARD_RIGHT = 3'b011;
+    localparam STATE_LIGHT_RIGHT= 3'b100;
+    localparam STATE_RECOVER    = 3'b101;
+    localparam STATE_STRAIGHT   = 3'b110;
 
     localparam MODE_STOP     = 3'b000;
     localparam MODE_FORWARD  = 3'b001;
-    localparam MODE_LEFT     = 3'b010;
-    localparam MODE_RIGHT    = 3'b011;
-    localparam MODE_BACKWARD = 3'b100;
+    localparam MODE_HARD_LEFT   = 3'b010;
+    localparam MODE_LIGHT_LEFT  = 3'b011;
+    localparam MODE_HARD_RIGHT  = 3'b100;
+    localparam MODE_LIGHT_RIGHT = 3'b101;
+    localparam MODE_BACKWARD = 3'b110;
 
     localparam STOP_DISTANCE = 19'd15;
 
