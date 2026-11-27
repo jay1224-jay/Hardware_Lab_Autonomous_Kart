@@ -58,7 +58,7 @@ module motor(
 
     // TODO: trace the rest of motor.v and control the speed and direction of the two motors
 
-	assign {l_IN, r_IN} = (mode == 0) ? 2'b00 : 2'b01;
+	assign {l_IN, r_IN} = (mode == 0) ? 4'b0000 : 4'b0101;
     
 endmodule
 
