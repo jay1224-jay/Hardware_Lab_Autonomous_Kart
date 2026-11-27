@@ -62,7 +62,7 @@ module trig_signal(
         end else begin
             next_count = count + 1'b1;
         end
-        if (count >= 24'd1000) begin
+        if (count > 24'd1_000_000) begin
             next_trig = 1'b0;
         end else begin
             next_trig = 1'b1;
