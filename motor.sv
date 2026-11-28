@@ -17,32 +17,40 @@ module motor(
         right_motor = 0;
 		case(mode)
 			0: begin //stop
-				left_motor = 650;
-    			right_motor = 650;
+				left_motor = 0;
+    			right_motor = 0;
+                {l_IN, r_IN} = 4'b0000;
 			end
 			1: begin //forward
 				left_motor = 650;
     			right_motor = 650;
+                {l_IN, r_IN} = 4'b0101;
 			end
 			2: begin //hard_left
-				left_motor = 350;
-    			right_motor = 700;
+				left_motor = 0;
+    			right_motor = 750;
+                {l_IN, r_IN} = 4'b0001;
 			end
 			3: begin //light_left
-				left_motor = 600;
+				left_motor = 560;
     			right_motor = 750;
+                {l_IN, r_IN} = 4'b0101;
 			end
 			4: begin //hard_right
 				left_motor = 700;
-    			right_motor = 350;
+    			right_motor = 0;
+                {l_IN, r_IN} = 4'b0101;
+
 			end
 			5: begin //light_right
 				left_motor = 750;
-    			right_motor = 600;
+    			right_motor = 560;
+                {l_IN, r_IN} = 4'b0101;
 			end
 			default: begin //backward 
                 left_motor = 650;
     			right_motor = 650;
+                {l_IN, r_IN} = 4'b1010;
 			end
 		endcase
 	end
@@ -66,8 +74,6 @@ module motor(
     );
 
     // TODO: trace the rest of motor.v and control the speed and direction of the two motors
-
-	assign {l_IN, r_IN} = (mode == 0) ? 4'b0000 : 4'b0101;
     
 endmodule
 
