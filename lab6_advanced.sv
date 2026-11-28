@@ -37,7 +37,7 @@ module lab6_advanced(
     localparam MODE_LIGHT_RIGHT = 3'b101;
     localparam MODE_BACKWARD = 3'b110;
 
-    localparam STOP_DISTANCE = 19'd15;
+    localparam STOP_DISTANCE = 19'd40;
 
     logic rst_de, rst_op;
     debounce de(.clk(clk), .pb(rst), .pb_debounced(rst_de));
@@ -71,10 +71,10 @@ module lab6_advanced(
                 mode = MODE_STOP;
         endcase
 
-
+        /*
         if (distance <= STOP_DISTANCE)
             mode = MODE_STOP;
-
+        */
     end
     
     tracker_sensor A(
