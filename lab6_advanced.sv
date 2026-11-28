@@ -7,6 +7,7 @@ module lab6_advanced(
     input logic IR_out4,    // inner-right
     input logic IR_out5,    // far-right
     input logic echo,
+    input logic [1:0] sw,
     output logic trig,
     output logic IN1,
     output logic IN2,
@@ -96,6 +97,7 @@ module lab6_advanced(
         .clk(clk),
         .rst(rst_op),
         .mode(mode),
+        .speed(sw),
         .pwm({left_pwm, right_pwm}),
         .l_IN({IN1, IN2}),
         .r_IN({IN3, IN4})

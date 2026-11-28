@@ -5,13 +5,35 @@ module motor(
     input logic clk,
     input logic rst,
     input logic [2:0] mode,
+    input logic [1:0] speed,
     output logic [1:0] pwm,
     output logic [1:0] r_IN,
     output logic [1:0] l_IN
 );
     logic [9:0] left_motor, right_motor;
     logic left_pwm, right_pwm;
-	
+    logic [9:0] light_speed, hard_speed;
+    always_comb begin
+        case (speed)
+            2'b00: begin
+                light_speed = 513;
+                hard_speed = 700;
+            end
+            2'b01: begin
+                light_speed = 600;
+                hard_speed = 750;
+            end
+            2'b10: begin
+                light_speed = 513;
+                hard_speed = 600;
+            end
+            default: begin
+                light_speed = 400;
+                hard_speed = 700;
+            end
+        endcase
+    end
+
 	always_comb begin
         left_motor = 0;
         right_motor = 0;
@@ -22,34 +44,34 @@ module motor(
                 {l_IN, r_IN} = 4'b0000;
 			end
 			1: begin //forward
-				left_motor = 650;
-    			right_motor = 650;
+				left_motor = light_speed;
+    			right_motor = light_speed;
                 {l_IN, r_IN} = 4'b0101;
 			end
 			2: begin //hard_left
 				left_motor = 0;
-    			right_motor = 750;
+    			right_motor = hard_speed;
                 {l_IN, r_IN} = 4'b0001;
 			end
 			3: begin //light_left
-				left_motor = 560;
-    			right_motor = 750;
+				left_motor = light_speed;
+    			right_motor = hard_speed;
                 {l_IN, r_IN} = 4'b0101;
 			end
 			4: begin //hard_right
-				left_motor = 700;
+				left_motor = hard_speed;
     			right_motor = 0;
                 {l_IN, r_IN} = 4'b0101;
 
 			end
 			5: begin //light_right
-				left_motor = 750;
-    			right_motor = 560;
+				left_motor = light_speed;
+    			right_motor = light_speed;
                 {l_IN, r_IN} = 4'b0101;
 			end
 			default: begin //backward 
-                left_motor = 650;
-    			right_motor = 650;
+                left_motor = light_speed;
+    			right_motor = light_speed;
                 {l_IN, r_IN} = 4'b1010;
 			end
 		endcase
