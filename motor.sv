@@ -10,26 +10,27 @@ module motor(
     output logic [1:0] r_IN,
     output logic [1:0] l_IN
 );
+    localparam [9:0] offset = 60;
     logic [9:0] left_motor, right_motor;
     logic left_pwm, right_pwm;
     logic [9:0] light_speed, hard_speed;
     always_comb begin
         case (speed)
             2'b00: begin
-                light_speed = 513;
-                hard_speed = 700;
+                light_speed = 600;
+                hard_speed = 600;
             end
             2'b01: begin
                 light_speed = 600;
-                hard_speed = 750;
+                hard_speed = 650;
             end
             2'b10: begin
-                light_speed = 513;
+                light_speed = 650;
                 hard_speed = 600;
             end
             default: begin
-                light_speed = 400;
-                hard_speed = 700;
+                light_speed = 550;
+                hard_speed = 550;
             end
         endcase
     end
@@ -54,19 +55,18 @@ module motor(
                 {l_IN, r_IN} = 4'b0001;
 			end
 			3: begin //light_left
-				left_motor = light_speed;
-    			right_motor = hard_speed;
+				left_motor = light_speed - offset;
+    			right_motor = light_speed;
                 {l_IN, r_IN} = 4'b0101;
 			end
 			4: begin //hard_right
 				left_motor = hard_speed;
     			right_motor = 0;
                 {l_IN, r_IN} = 4'b0101;
-
 			end
 			5: begin //light_right
 				left_motor = light_speed;
-    			right_motor = light_speed;
+    			right_motor = light_speed - offset;
                 {l_IN, r_IN} = 4'b0101;
 			end
 			default: begin //backward 

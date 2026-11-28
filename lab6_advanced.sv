@@ -8,6 +8,8 @@ module lab6_advanced(
     input logic IR_out5,    // far-right
     input logic echo,
     input logic [1:0] sw,
+    input logic mandatory_straight,
+    input logic mandatory_stop,
     output logic trig,
     output logic IN1,
     output logic IN2,
@@ -76,6 +78,13 @@ module lab6_advanced(
         if (distance <= STOP_DISTANCE)
             mode = MODE_STOP;
         */
+
+        if (mandatory_straight)
+            mode = MODE_FORWARD;
+
+        if (mandatory_stop)
+            mode = MODE_STOP;
+
     end
     
     tracker_sensor A(
